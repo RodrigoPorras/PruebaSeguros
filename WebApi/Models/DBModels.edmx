@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CRUDDBPSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Cedula" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Poliza">
+          <Key>
+            <PropertyRef Name="IDPoliza" />
+          </Key>
+          <Property Name="IDPoliza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="500" />
+          <Property Name="IDTipoCubrimiento" Type="int" />
+          <Property Name="Cobertura" Type="float" />
+          <Property Name="InicioVigenciaPoliza" Type="date" />
+          <Property Name="PeriodoDeCobertura" Type="int" />
+          <Property Name="PrecioPoliza" Type="float" />
+          <Property Name="IDTipoRiesgo" Type="int" />
+          <Property Name="IDCliente" Type="int" />
+        </EntityType>
+        <EntityType Name="TipoDeCubrimiento">
+          <Key>
+            <PropertyRef Name="IDCubrimiento" />
+          </Key>
+          <Property Name="IDCubrimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TipoDeRiesgo">
+          <Key>
+            <PropertyRef Name="IDRiesgo" />
+          </Key>
+          <Property Name="IDRiesgo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescripcionRiesgo" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityContainer Name="CRUDDBPSModelStoreContainer">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Poliza" EntityType="Self.Poliza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDeCubrimiento" EntityType="Self.TipoDeCubrimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDeRiesgo" EntityType="Self.TipoDeRiesgo" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRUDDBPSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cedula" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Poliza">
+          <Key>
+            <PropertyRef Name="IDPoliza" />
+          </Key>
+          <Property Name="IDPoliza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IDTipoCubrimiento" Type="Int32" />
+          <Property Name="Cobertura" Type="Double" />
+          <Property Name="InicioVigenciaPoliza" Type="DateTime" Precision="0" />
+          <Property Name="PeriodoDeCobertura" Type="Int32" />
+          <Property Name="PrecioPoliza" Type="Double" />
+          <Property Name="IDTipoRiesgo" Type="Int32" />
+          <Property Name="IDCliente" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TipoDeCubrimiento">
+          <Key>
+            <PropertyRef Name="IDCubrimiento" />
+          </Key>
+          <Property Name="IDCubrimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TipoDeRiesgo">
+          <Key>
+            <PropertyRef Name="IDRiesgo" />
+          </Key>
+          <Property Name="IDRiesgo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescripcionRiesgo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Poliza" EntityType="Self.Poliza" />
+          <EntitySet Name="TipoDeCubrimiento" EntityType="Self.TipoDeCubrimiento" />
+          <EntitySet Name="TipoDeRiesgo" EntityType="Self.TipoDeRiesgo" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRUDDBPSModelStoreContainer" CdmEntityContainer="DBModel">
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="CRUDDBPSModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Poliza">
+            <EntityTypeMapping TypeName="CRUDDBPSModel.Poliza">
+              <MappingFragment StoreEntitySet="Poliza">
+                <ScalarProperty Name="IDPoliza" ColumnName="IDPoliza" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IDTipoCubrimiento" ColumnName="IDTipoCubrimiento" />
+                <ScalarProperty Name="Cobertura" ColumnName="Cobertura" />
+                <ScalarProperty Name="InicioVigenciaPoliza" ColumnName="InicioVigenciaPoliza" />
+                <ScalarProperty Name="PeriodoDeCobertura" ColumnName="PeriodoDeCobertura" />
+                <ScalarProperty Name="PrecioPoliza" ColumnName="PrecioPoliza" />
+                <ScalarProperty Name="IDTipoRiesgo" ColumnName="IDTipoRiesgo" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDeCubrimiento">
+            <EntityTypeMapping TypeName="CRUDDBPSModel.TipoDeCubrimiento">
+              <MappingFragment StoreEntitySet="TipoDeCubrimiento">
+                <ScalarProperty Name="IDCubrimiento" ColumnName="IDCubrimiento" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDeRiesgo">
+            <EntityTypeMapping TypeName="CRUDDBPSModel.TipoDeRiesgo">
+              <MappingFragment StoreEntitySet="TipoDeRiesgo">
+                <ScalarProperty Name="IDRiesgo" ColumnName="IDRiesgo" />
+                <ScalarProperty Name="DescripcionRiesgo" ColumnName="DescripcionRiesgo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

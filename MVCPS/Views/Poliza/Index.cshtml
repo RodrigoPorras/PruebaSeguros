@@ -1,0 +1,87 @@
+﻿@model IEnumerable<MVCPS.Models.mvcPolizaModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDPoliza)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDTipoCubrimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cobertura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InicioVigenciaPoliza)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PeriodoDeCobertura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrecioPoliza)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDTipoRiesgo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDCliente)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDPoliza)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDTipoCubrimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cobertura)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InicioVigenciaPoliza)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PeriodoDeCobertura)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrecioPoliza)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDTipoRiesgo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDCliente)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
