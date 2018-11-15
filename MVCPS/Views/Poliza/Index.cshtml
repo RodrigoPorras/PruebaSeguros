@@ -4,46 +4,47 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br/>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="@Url.Action("AddOrEdit","Poliza")" class="btn btn-default"><i class="fa fa-plus"></i>Crear Nueva Poliza</a>    
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IDPoliza)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IDTipoCubrimiento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cobertura)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InicioVigenciaPoliza)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PeriodoDeCobertura)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrecioPoliza)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IDTipoRiesgo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IDCliente)
-        </th>
-        <th></th>
-    </tr>
-
+<table class="table table-striped">
+    <thead class="table-heading">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IDPoliza)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDTipoCubrimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cobertura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InicioVigenciaPoliza)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeriodoDeCobertura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioPoliza)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDTipoRiesgo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDCliente)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
 @foreach (var item in Model) {
     <tr>
         <td>

@@ -18,5 +18,22 @@ namespace MVCPS.Controllers
             polizaList = response.Content.ReadAsAsync<IEnumerable<mvcPolizaModel>>().Result;
             return View(polizaList);
         }
+
+
+        public ActionResult AddOrEdit(int id = 0)
+        {
+            return View(new mvcPolizaModel());
+        }
+
+        [HttpPost]
+        public ActionResult AddOrEdit(mvcPolizaModel poliza)
+        {
+            Console.WriteLine("entra el metrood");
+            HttpResponseMessage response = GlobalVariables.webApiClient.PostAsJsonAsync("Polizas", poliza).Result;
+
+            return RedirectToAction("Index");
+        }
     }
+
+
 }

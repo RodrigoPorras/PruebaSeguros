@@ -1,0 +1,74 @@
+﻿@model MVCPS.Models.mvcPolizaModel
+
+@{
+    ViewBag.Title = "AddOrEdit";
+}
+
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.IDPoliza)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nombre)
+            @Html.EditorFor(model => model.Nombre)
+            @Html.ValidationMessageFor(model => model.Nombre)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descripcion)
+            @Html.EditorFor(model => model.Descripcion)
+            @Html.ValidationMessageFor(model => model.Descripcion)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDTipoCubrimiento)
+            @Html.EditorFor(model => model.IDTipoCubrimiento)
+            @Html.ValidationMessageFor(model => model.IDTipoCubrimiento)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cobertura)
+            @Html.EditorFor(model => model.Cobertura)
+            @Html.ValidationMessageFor(model => model.Cobertura)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.InicioVigenciaPoliza)
+            @Html.EditorFor(model => model.InicioVigenciaPoliza)
+            @Html.ValidationMessageFor(model => model.InicioVigenciaPoliza)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PeriodoDeCobertura)
+            @Html.EditorFor(model => model.PeriodoDeCobertura)
+            @Html.ValidationMessageFor(model => model.PeriodoDeCobertura)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrecioPoliza)
+            @Html.EditorFor(model => model.PrecioPoliza)
+            @Html.ValidationMessageFor(model => model.PrecioPoliza)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDTipoRiesgo)
+            @Html.EditorFor(model => model.IDTipoRiesgo)
+            @Html.ValidationMessageFor(model => model.IDTipoRiesgo)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDCliente)
+            @Html.EditorFor(model => model.IDCliente)
+            @Html.ValidationMessageFor(model => model.IDCliente)
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn button" />
+            <input type="reset" value="Reset" class="btn button"/>
+        </div>
+    }
+
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+
+    }
