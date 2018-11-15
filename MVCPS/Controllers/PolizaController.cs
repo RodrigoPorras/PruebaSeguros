@@ -22,12 +22,29 @@ namespace MVCPS.Controllers
 
         public ActionResult AddOrEdit(int id = 0)
         {
-            if(id == 0)
-             return View(new mvcPolizaModel());
+
+            HttpResponseMessage responseTC = GlobalVariables.webApiClient.GetAsync("TipoDeCubrimientos").Result;
+            HttpResponseMessage responseTR = GlobalVariables.webApiClient.GetAsync("TipoDeRiesgos").Result;
+            mvcPolizaModel tmpPolizaModel;
+
+            if (id == 0)
+            {
+                tmpPolizaModel = new mvcPolizaModel();
+               
+                tmpPolizaModel.tipoDeCubrimientoCollection = responseTC.Content.ReadAsAsync<IEnumerable<mvcTipoDeCubrimientoModel>>().Result.ToList();
+                tmpPolizaModel.tipoDeRiesgoCollection = responseTR.Content.ReadAsAsync<IEnumerable<mvcTipoDeRiesgoModel>>().Result.ToList();
+
+                return View(tmpPolizaModel);
+            }
             else
             {
-                HttpResponseMessage response = GlobalVariables.webApiClient.GetAsync("Polizas/"+id.ToString()).Result;
-                return View(response.Content.ReadAsAsync<mvcPolizaModel>().Result);
+                HttpResponseMessage response = GlobalVariables.webApiClient.GetAsync("Polizas/" + id.ToString()).Result;
+                tmpPolizaModel = response.Content.ReadAsAsync<mvcPolizaModel>().Result;
+
+                tmpPolizaModel.tipoDeCubrimientoCollection = responseTC.Content.ReadAsAsync<IEnumerable<mvcTipoDeCubrimientoModel>>().Result.ToList();
+                tmpPolizaModel.tipoDeRiesgoCollection = responseTR.Content.ReadAsAsync<IEnumerable<mvcTipoDeRiesgoModel>>().Result.ToList();
+
+                return View(tmpPolizaModel);
             }
         }
 

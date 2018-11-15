@@ -11,7 +11,8 @@ namespace WebApi.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Poliza
     {
         public int IDPoliza { get; set; }
