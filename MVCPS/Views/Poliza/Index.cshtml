@@ -78,11 +78,20 @@
             @Html.DisplayFor(modelItem => item.IDCliente)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            <a href="@Url.Action("AddOrEdit","Poliza",new { id = item.IDPoliza})" class="btn btn-default"><i class="fa fa-pencil"></i>Editar</a>
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }
 
 </table>
+
+@section scripts{
+    <script>
+        $(function () {
+            var sucessMessage = '@TempData["SuccessMessage"]'
+            if (sucessMessage != '')
+                alertify.success(sucessMessage);
+        });
+    </script>
+    }

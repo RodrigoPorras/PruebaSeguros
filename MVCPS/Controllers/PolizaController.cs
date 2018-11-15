@@ -22,15 +22,28 @@ namespace MVCPS.Controllers
 
         public ActionResult AddOrEdit(int id = 0)
         {
-            return View(new mvcPolizaModel());
+            if(id == 0)
+             return View(new mvcPolizaModel());
+            else
+            {
+                HttpResponseMessage response = GlobalVariables.webApiClient.GetAsync("Polizas/"+id.ToString()).Result;
+                return View(response.Content.ReadAsAsync<mvcPolizaModel>().Result);
+            }
         }
 
         [HttpPost]
         public ActionResult AddOrEdit(mvcPolizaModel poliza)
         {
-            Console.WriteLine("entra el metrood");
-            HttpResponseMessage response = GlobalVariables.webApiClient.PostAsJsonAsync("Polizas", poliza).Result;
-
+            if(poliza.IDPoliza == 0)
+            {
+                HttpResponseMessage response = GlobalVariables.webApiClient.PostAsJsonAsync("Polizas", poliza).Result;
+                TempData["SuccessMessage"] = "Poliza Guardada Exitosamente";
+            }
+            else
+            {
+                HttpResponseMessage response = GlobalVariables.webApiClient.PutAsJsonAsync("Polizas/"+poliza.IDPoliza,poliza).Result;
+                TempData["SuccessMessage"] = "Poliza Actualizada Exitosamente";
+            }
             return RedirectToAction("Index");
         }
     }
