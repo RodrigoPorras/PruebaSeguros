@@ -46,6 +46,13 @@ namespace MVCPS.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public ActionResult Delete(int id)
+        {
+            HttpResponseMessage response = GlobalVariables.webApiClient.DeleteAsync("Polizas/"+id.ToString()).Result;
+            TempData["SuccessMessage"] = "Poliza Eliminada Exitosamente";
+            return RedirectToAction("Index");
+        }
     }
 
 

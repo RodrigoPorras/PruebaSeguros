@@ -79,7 +79,8 @@
         </td>
         <td>
             <a href="@Url.Action("AddOrEdit","Poliza",new { id = item.IDPoliza})" class="btn btn-default"><i class="fa fa-pencil"></i>Editar</a>
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            <a onclick="Delete(@item.IDPoliza)" class="btn btn-default"><i class="fa fa-trash"></i>Eliminar</a>
+
         </td>
     </tr>
 }
@@ -93,5 +94,11 @@
             if (sucessMessage != '')
                 alertify.success(sucessMessage);
         });
+
+        function Delete(id) {
+            alertify.confirm('Eliminar Poliza', 'Esta Seguro Que Desea Eliminar Este Registro?', function () {
+                window.location.href = '@Url.Action("Delete","Poliza")/' + id;
+            },null)
+        }
     </script>
     }
