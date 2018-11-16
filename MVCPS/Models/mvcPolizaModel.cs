@@ -22,8 +22,8 @@ namespace MVCPS.Models
 
         [Required(ErrorMessage = "Este campo es necesario")]
         [Range(1,100,ErrorMessage ="El valor debe estar entre 1 y 100")]
-        [ValidacionCoberturaAttribute("IDTipoRiesgo",ErrorMessage ="valor menor o igual a 50")]
-        public double? Cobertura { get; set; }
+        [ValidacionCoberturaAttribute("IDTipoRiesgo",ErrorMessage = "valor menor o igual a 50")]
+        public Nullable<double> Cobertura { get; set; }
 
         [Required(ErrorMessage = "Este campo es necesario")]
         public Nullable<System.DateTime> InicioVigenciaPoliza { get; set; }

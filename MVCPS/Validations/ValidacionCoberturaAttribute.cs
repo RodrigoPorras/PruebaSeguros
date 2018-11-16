@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Diagnostics;
+using System.Web.Mvc;
 
 namespace MVCPS.ModelsValidations
 {
@@ -13,16 +14,18 @@ namespace MVCPS.ModelsValidations
     {
 
         private readonly string _other;
+
         public ValidacionCoberturaAttribute(string other)
         {
             _other = other;
         }
+
         public override bool RequiresValidationContext { get { return true; } }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
 
-            var property = validationContext.ObjectType.GetProperty(_other);
+            PropertyInfo property = validationContext.ObjectType.GetProperty(_other);
 
             if (property == null)
             {
@@ -32,12 +35,13 @@ namespace MVCPS.ModelsValidations
             }
             var otherValue = property.GetValue(validationContext.ObjectInstance, null);
 
-            if ((int) otherValue == 1 && Convert.ToSingle(value) > 50)
+            if ((int) otherValue == 4 && Convert.ToSingle(value) > 50)
             {
-                return new ValidationResult(this.FormatErrorMessage(validationContext.DisplayName));
+                return new ValidationResult(FormatErrorMessage(ErrorMessageString));
             }
             return null;
         }
-        
+
+
     }
 }

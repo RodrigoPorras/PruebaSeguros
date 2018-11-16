@@ -69,11 +69,11 @@ namespace MVCPS.Controllers
                 return RedirectToAction("Index");
             }else {
                 var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
-                TempData["ErrorMessage"] = "Error no se pudo Guardar/Actualizar" + ModelState.IsValid;
+                TempData["ErrorMessage"] = "Error no se pudo Guardar/Actualizar";
                 return RedirectToAction("Index");
+               
             }
-
-           
+            
         }
 
         public ActionResult Delete(int id)
