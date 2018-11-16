@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MVCPS.Models
 {
-    public class mvcTipoDeCubrimientoModel
+    public class MvcTipoDeCubrimientoModel
     {
         public int IDCubrimiento { get; set; }
         public string Descripcion { get; set; }

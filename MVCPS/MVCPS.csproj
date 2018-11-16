@@ -151,9 +151,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalVariables.cs" />
-    <Compile Include="Models\mvcPolizaModel.cs" />
-    <Compile Include="Models\mvcTipoDeCubrimientoModel.cs" />
-    <Compile Include="Models\mvcTipoDeRiesgoModel.cs" />
+    <Compile Include="Validations\ValidacionCoberturaAttribute.cs" />
+    <Compile Include="Models\MvcPolizaModel.cs" />
+    <Compile Include="Models\MvcTipoDeCubrimientoModel.cs" />
+    <Compile Include="Models\MvcTipoDeRiesgoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

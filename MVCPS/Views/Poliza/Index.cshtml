@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVCPS.Models.mvcPolizaModel>
+﻿@model IEnumerable<MVCPS.Models.MvcPolizaModel>
 
 @{
     ViewBag.Title = "Index";
@@ -93,6 +93,12 @@
             var sucessMessage = '@TempData["SuccessMessage"]'
             if (sucessMessage != '')
                 alertify.success(sucessMessage);
+            else {
+                var errorMessage = '@TempData["ErrorMessage"]'
+                if (errorMessage != '')
+                    alertify.error(errorMessage);
+                alert(errorMessage);
+            }
         });
 
         function Delete(id) {

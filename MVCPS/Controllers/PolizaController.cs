@@ -1,6 +1,7 @@
 ﻿using MVCPS.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -13,9 +14,9 @@ namespace MVCPS.Controllers
         // GET: Poliza
         public ActionResult Index()
         {
-            IEnumerable<mvcPolizaModel> polizaList;
+            IEnumerable<MvcPolizaModel> polizaList;
             HttpResponseMessage response = GlobalVariables.webApiClient.GetAsync("Polizas").Result;
-            polizaList = response.Content.ReadAsAsync<IEnumerable<mvcPolizaModel>>().Result;
+            polizaList = response.Content.ReadAsAsync<IEnumerable<MvcPolizaModel>>().Result;
             return View(polizaList);
         }
 
@@ -25,43 +26,54 @@ namespace MVCPS.Controllers
 
             HttpResponseMessage responseTC = GlobalVariables.webApiClient.GetAsync("TipoDeCubrimientos").Result;
             HttpResponseMessage responseTR = GlobalVariables.webApiClient.GetAsync("TipoDeRiesgos").Result;
-            mvcPolizaModel tmpPolizaModel;
+            MvcPolizaModel tmpPolizaModel;
 
             if (id == 0)
             {
-                tmpPolizaModel = new mvcPolizaModel();
-               
-                tmpPolizaModel.tipoDeCubrimientoCollection = responseTC.Content.ReadAsAsync<IEnumerable<mvcTipoDeCubrimientoModel>>().Result.ToList();
-                tmpPolizaModel.tipoDeRiesgoCollection = responseTR.Content.ReadAsAsync<IEnumerable<mvcTipoDeRiesgoModel>>().Result.ToList();
+                tmpPolizaModel = new MvcPolizaModel
+                {
+                    TipoDeCubrimientoCollection = responseTC.Content.ReadAsAsync<IEnumerable<MvcTipoDeCubrimientoModel>>().Result.ToList(),
+                    TipoDeRiesgoCollection = responseTR.Content.ReadAsAsync<IEnumerable<MvcTipoDeRiesgoModel>>().Result.ToList()
+                };
 
                 return View(tmpPolizaModel);
             }
             else
             {
                 HttpResponseMessage response = GlobalVariables.webApiClient.GetAsync("Polizas/" + id.ToString()).Result;
-                tmpPolizaModel = response.Content.ReadAsAsync<mvcPolizaModel>().Result;
+                tmpPolizaModel = response.Content.ReadAsAsync<MvcPolizaModel>().Result;
 
-                tmpPolizaModel.tipoDeCubrimientoCollection = responseTC.Content.ReadAsAsync<IEnumerable<mvcTipoDeCubrimientoModel>>().Result.ToList();
-                tmpPolizaModel.tipoDeRiesgoCollection = responseTR.Content.ReadAsAsync<IEnumerable<mvcTipoDeRiesgoModel>>().Result.ToList();
+                tmpPolizaModel.TipoDeCubrimientoCollection = responseTC.Content.ReadAsAsync<IEnumerable<MvcTipoDeCubrimientoModel>>().Result.ToList();
+                tmpPolizaModel.TipoDeRiesgoCollection = responseTR.Content.ReadAsAsync<IEnumerable<MvcTipoDeRiesgoModel>>().Result.ToList();
 
                 return View(tmpPolizaModel);
             }
         }
 
         [HttpPost]
-        public ActionResult AddOrEdit(mvcPolizaModel poliza)
+        public ActionResult AddOrEdit(MvcPolizaModel poliza)
         {
-            if(poliza.IDPoliza == 0)
+
+            if (ModelState.IsValid)
             {
-                HttpResponseMessage response = GlobalVariables.webApiClient.PostAsJsonAsync("Polizas", poliza).Result;
-                TempData["SuccessMessage"] = "Poliza Guardada Exitosamente";
+                if (poliza.IDPoliza == 0)
+                {
+                    HttpResponseMessage response = GlobalVariables.webApiClient.PostAsJsonAsync("Polizas", poliza).Result;
+                    TempData["SuccessMessage"] = "Poliza Guardada Exitosamente";
+                }
+                else
+                {
+                    HttpResponseMessage response = GlobalVariables.webApiClient.PutAsJsonAsync("Polizas/" + poliza.IDPoliza, poliza).Result;
+                    TempData["SuccessMessage"] = "Poliza Actualizada Exitosamente";
+                }
+                return RedirectToAction("Index");
+            }else {
+                var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
+                TempData["ErrorMessage"] = "Error no se pudo Guardar/Actualizar" + ModelState.IsValid;
+                return RedirectToAction("Index");
             }
-            else
-            {
-                HttpResponseMessage response = GlobalVariables.webApiClient.PutAsJsonAsync("Polizas/"+poliza.IDPoliza,poliza).Result;
-                TempData["SuccessMessage"] = "Poliza Actualizada Exitosamente";
-            }
-            return RedirectToAction("Index");
+
+           
         }
 
         public ActionResult Delete(int id)

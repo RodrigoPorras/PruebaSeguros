@@ -1,4 +1,4 @@
-﻿@model MVCPS.Models.mvcPolizaModel
+﻿@model MVCPS.Models.MvcPolizaModel
 
 @{
     ViewBag.Title = "AddOrEdit";
@@ -25,7 +25,7 @@
             <table>
                 @Html.LabelFor(model => model.IDTipoCubrimiento)
                 <td>
-                    @Html.DropDownListFor(model => model.IDTipoCubrimiento, new SelectList(Model.tipoDeCubrimientoCollection, "IDCubrimiento", "Descripcion"), "Select")
+                    @Html.DropDownListFor(model => model.IDTipoCubrimiento, new SelectList(Model.TipoDeCubrimientoCollection, "IDCubrimiento", "Descripcion"), "Select")
                     @Html.ValidationMessageFor(model => model.IDTipoCubrimiento)
                 </td>
             </table>
@@ -57,7 +57,7 @@
             <table>
                 @Html.LabelFor(model => model.IDTipoRiesgo)
                 <td>
-                    @Html.DropDownListFor(model => model.IDTipoRiesgo, new SelectList(Model.tipoDeRiesgoCollection, "IDRiesgo", "DescripcionRiesgo"), "Select")
+                    @Html.DropDownListFor(model => model.IDTipoRiesgo, new SelectList(Model.TipoDeRiesgoCollection, "IDRiesgo", "DescripcionRiesgo"), "Select")
                     @Html.ValidationMessageFor(model => model.IDTipoRiesgo)
                 </td>
             </table>
@@ -77,6 +77,7 @@
 </div>
 
 @section scripts{
+   
     @Scripts.Render("~/bundles/jqueryval");
 
     }
