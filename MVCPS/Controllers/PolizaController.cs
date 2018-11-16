@@ -68,10 +68,9 @@ namespace MVCPS.Controllers
                 }
                 return RedirectToAction("Index");
             }else {
-                var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
-                TempData["ErrorMessage"] = "Error no se pudo Guardar/Actualizar";
+               // TempData["ErrorMessage"] = "Error no se pudo Guardar/Actualizar";
+                TempData["ErrorMessage"] = "Si el riesgo es alto la cobertura debe ser maximo 50%";
                 return RedirectToAction("Index");
-               
             }
             
         }
