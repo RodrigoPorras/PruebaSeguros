@@ -33,18 +33,20 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Cobertura)
+            @Html.Label("%")
             @Html.EditorFor(model => model.Cobertura)
             @Html.ValidationMessageFor(model => model.Cobertura)
         </div>
-
+       
         <div class="form-group">
             @Html.LabelFor(model => model.InicioVigenciaPoliza)
-            @Html.EditorFor(model => model.InicioVigenciaPoliza)
+            @Html.EditorFor(model => model.InicioVigenciaPoliza, new { htmlAttributes = new { @class = "datepicker"} })
             @Html.ValidationMessageFor(model => model.InicioVigenciaPoliza)
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.PeriodoDeCobertura)
+            @Html.Label("(En Meses)")
             @Html.EditorFor(model => model.PeriodoDeCobertura)
             @Html.ValidationMessageFor(model => model.PeriodoDeCobertura)
         </div>
@@ -76,7 +78,18 @@
 
 </div>
 
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
 @section scripts{
    
+
     @Scripts.Render("~/bundles/jqueryval");
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script>
+    $(function () {
+        $(".datepicker").datepicker();
+    });
+
+</script>
+
 }
